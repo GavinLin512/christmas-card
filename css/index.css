@@ -1,320 +1,293 @@
+@import url("https://fonts.googleapis.com/css?family=Mirza&amp;subset=latin-ext");
+* {
+  box-sizing: border-box;
+}
+
 body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fcb592;
+  background-color: #928A97;
+  background-image: url("https://images.pexels.com/photos/257909/pexels-photo-257909.jpeg?fit=crop&w=1920&h=1280");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.card {
+  perspective: 1500px;
+  position: absolute;
+  left: calc(50% - 175px);
+  top: calc(50% - 250px);
+  transition-property: transform;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition-delay: initial;
+  transform: rotate(-10deg) translate(0, 0);
+  -webkit-animation: cardIn 1s alternate cubic-bezier(0.87, -0.41, 0.19, 1.44);
+  animation: cardIn 1s alternate cubic-bezier(0.87, -0.41, 0.19, 1.44);
+}
+@media (max-width: 767px) {
+  .card {
+    left: calc(50% - 115px);
+    top: calc(50% - 164.5px);
   }
-  
-  input#open {
-    display: none;
+}
+@media (max-width: 479px) {
+  .card {
+    left: calc(50% - 75px);
+    top: calc(50% - 107px);
   }
-  
-  .christmas-card {
-    position: relative;
-    width: 200px;
-    height:300px;
-    transform-style: preserve-3d;
-    transform: perspective(2500px);
-    transition: 3s;
+}
+.card:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 50px #000;
+  transition: all 0.5s ease-in-out;
+}
+.card.is-opened {
+  transform: rotate(0deg) translate(175px, 0);
+}
+@media (max-width: 767px) {
+  .card.is-opened {
+    transform: rotate(0deg) translate(115px, 0);
   }
-  
-  .card-front {
-    position: relative;
-    background-color: #fff;
-    width: 200px;
-    height:300px;
-    overflow: hidden;
-    transform-origin: left;
-    box-shadow: inset 100px 20px 100px rgba(0,0,0,.13), 30px 0 50px rgba(0,0,0,0.1);
-    transition: .3s;
+}
+@media (max-width: 479px) {
+  .card.is-opened {
+    transform: rotate(0deg) translate(75px, 0);
   }
-  
-  .card-front:before {
-    content:"";
-    position: absolute;
-    width: 180px;
-    height: 280px;
-    background-color: #c94038;
-    top: 10px;
-    left: 10px;
+}
+.card.is-opened .cart-page-front {
+  transform: rotateY(-180deg);
+}
+
+@-webkit-keyframes cardIn {
+  0% {
+    opacity: 0;
+    transform: rotate(-10deg) translate(0, -100%);
   }
-  
-  .christmas-tree {
-    position: absolute;
-    width:0;
-    height:0;
-    border-right: 50px solid transparent;
-    border-left: 50px solid transparent;
-    border-bottom: 160px solid #034247;
-    top: 75px;
-    left:50px;
+  25% {
+    opacity: 1;
   }
-  
-  .christmas-tree:after {
-    content:"";
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    background-color: #c47f1a;
-    left:-50px;
-    top:140px;
+  100% {
+    opacity: 1;
+    transform: rotate(-10deg) translate(0, 0);
   }
-  
-  .christmas-tree:before {
-    content:"";
-    position: absolute;
-    background-color: #a86d16;
-    width:50px;
-    height: 25px;
-    top:130px;
-    left:20px;
-    box-shadow: -90px 0 #a86d16;
+}
+
+@keyframes cardIn {
+  0% {
+    opacity: 0;
+    transform: rotate(-10deg) translate(0, -100%);
   }
-  
-  .card-inside {
-    position: absolute;
-    background-color: #fff;
-    width: 200px;
-    height:300px;
-    z-index:-1;
-    left:0;
-    top:0;
-    box-shadow: inset 100px 20px 100px rgba(0,0,0,0.2);
+  25% {
+    opacity: 1;
   }
-  
-  .card-inside:before {
-    content:"";
-    position: absolute;
-    width: 180px;
-    height: 280px;
-    background-color: #c94038;
-    top: 10px;
-    left: 10px;
+  100% {
+    opacity: 1;
+    transform: rotate(-10deg) translate(0, 0);
   }
-  
-  .open {
-    position: absolute;
-    width: 200px;
-    height:300px;
-    left:0;
-    top:0;
-    background-color: transparent;
-    z-index:6;
-    cursor: pointer;
+}
+.card,
+.card-page {
+  width: 420px;
+  height: 600px;
+}
+@media (max-width: 767px) {
+  .card,
+.card-page {
+    width: 230px;
+    height: 329px;
   }
-  
-  #open:checked ~ .card-front {
-    transform: rotateY(-155deg);
-    box-shadow: inset 100px 20px 100px rgba(0,0,0,.13), 30px 0 50px rgba(0,0,0,0.1);
-  }
-  
-  #open:checked ~ .card-front:before {
-    z-index:5;
-  }
-  
-  
-  .text {
-    position: absolute;
-    color: white;
-    font-family: brush script mt;
-    top:260px;
-    width:200px;
-    text-align: center;
-    font-size:15px;
-  }
-  
-  .text:before {
-    content:"Merry Christmas!";
-    position: absolute;
-    width:80px;
-    color: #333;
-    text-align: center;
-    line-height: 10px;
-    top:-42.5px;
-    left:61px;
-  }
-  
-  .text:after {
-    content:"";
-    position: absolute;
-    width:0;
-    height:0;
-    border-right: 7px solid transparent;
-    border-left: 7px solid transparent;
-    border-bottom: 20px solid #faa307;
-    top:-185px;
-    left:93px;
-  }
-  
-  .ribbon, .ribbon:before {
-    position: absolute;
-    width:0;
-    height:0;
-    border-bottom: 12.5px solid transparent;
-    border-top: 12.5px solid transparent;
-  }
-  
-  .ribbon {
-    border-left: 10px solid #c94038;
-    top:205px;
-    left:30px;
-  }
-  
-  .ribbon:before {
-    content:"";
-    border-right: 10px solid #c94038;
-    left: 120px;
-    top:-12.5px;
-  }
-  
-  .ribbon:after {
-    content:"";
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    border-radius:50%;
-    background-color: white;
-    top:-25px;
-    left:21.5px;
-    box-shadow: 5px -3px white, 10px -6px white, 15px -9px white, 20px -12px white, 25px -15px white, 30px -18px white, 35px -21px white, 40px -24px white, 45px -27px white, 50px -30px white, 55px -33px white, 60px -36px white, 60px -36px white, 15px -50px white, 20px -53px white, 25px -56px white, 30px -59px white, 35px -62px white, 40px -65px white, 45px -68px white, 50px -71px white;
-  }
-  
-  .star {
-    position: absolute;
-    display: block;
-    width: 0px;
-    height: 0px;
-    border-right: 20px solid transparent;
-    border-bottom: 13px solid #ffba08;
-    border-left: 20px solid transparent;
-    transform: rotate(-35deg);
-    top:68px;
-    left:80px;
-      }
-  
-  .star:before {
-        border-bottom: 13px solid #ffba08;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        position: absolute;
-        height: 0;
-        width: 0;
-        top: -9px;
-        left: -11px;
-        display: block;
-        content: '';
-        transform: rotate(-35deg);
-      }
-  
-  .star:after {
-        position: absolute;
-        display: block;
-        top: 0.75px;
-        left: -20px;
-        width: 0px;
-        height: 0px;
-        border-right: 20px solid transparent;
-        border-bottom: 13px solid #ffba08;
-        border-left: 20px solid transparent;
-        transform: rotate(-70deg);
-        content:'';
-  }
-  
-  .balls {
-    position: absolute;
-    width:12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #c94038;
-    top:185px;
-    left:110px;
-    box-shadow: -30px -30px #c94038, -18px -74px #c94038;
-  }
-  
-  .balls:before {
-    content:"";
-    position: absolute;
-    border-radius: 50%;
-    widtH: 10px;
-    height: 10px;
-    background-color: #f6b4b8;
-    left:-20px;
-    top:10px;
-    box-shadow: 15px -55px #f6b4b8;
-  }
-  
-  .title {
-    position: absolute;
-    color: #333;
-    font-size:30px;
-    font-family: brush script mt;
-    line-height: 25px;
-    text-align: center;
-    top:45px;
-    width:200px;
-  }
-  
-  .wishes {
-    position: absolute;
+}
+@media (max-width: 479px) {
+  .card,
+.card-page {
     width: 150px;
-    text-align: center;
-    font-family: brush script mt;
-    line-height:15px;
+    height: 214px;
+  }
+}
+
+.card-page {
+  transition: transform 1s ease-in-out;
+  cursor: pointer;
+  position: absolute;
+  outline: 1px solid transparent;
+}
+
+.cart-page-front {
+  transform-origin: 0 50% 0;
+  transform-style: preserve-3d;
+  transform: rotateY(-20deg);
+  z-index: 2;
+}
+
+.cart-page-outside,
+.cart-page-inside {
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+}
+
+.cart-page-outside {
+  border: 10px solid #fbfbfb;
+  background: #c72320 url("https://www.dropbox.com/s/xsgg2exs2oparkm/front-bg.png?raw=1") no-repeat center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 767px) {
+  .cart-page-outside {
+    border: 5px solid #fbfbfb;
+  }
+}
+
+.cart-page-inside,
+.cart-page-bottom {
+  background-color: #d4d1d0;
+  background-image: url("https://www.dropbox.com/s/8hw7guch8d151kg/pattern.png?raw=1");
+  border: 20px solid #d4d1d0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -moz-flex;
+  display: flex;
+  box-pack: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  box-align: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .cart-page-inside,
+.cart-page-bottom {
+    border: 10px solid #d4d1d0;
+  }
+}
+
+.cart-page-inside {
+  transform: rotateY(-180deg);
+  border-right: none !important;
+  background-position: 0px 80px;
+}
+@media (max-width: 767px) {
+  .cart-page-inside {
+    background-position: 0px 30px;
+  }
+}
+@media (max-width: 479px) {
+  .cart-page-inside {
+    background-position: 0px 30px;
+  }
+}
+
+.cart-page-bottom {
+  z-index: 1;
+  border-left: none !important;
+  background-position: -22px 80px;
+}
+@media (max-width: 767px) {
+  .cart-page-bottom {
+    background-position: 85px 30px;
+  }
+}
+@media (max-width: 479px) {
+  .cart-page-bottom {
+    background-position: 0px 30px;
+  }
+}
+
+.merry-christmas {
+  transform: rotate(-20deg);
+}
+.merry-christmas svg {
+  width: 350px;
+  height: auto;
+}
+@media (max-width: 767px) {
+  .merry-christmas svg {
+    width: 200px;
+  }
+}
+@media (max-width: 479px) {
+  .merry-christmas svg {
+    width: 150px;
+  }
+}
+
+.click-icon {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 20px;
+  -webkit-animation: iconAnimation 1s infinite alternate ease-in-out;
+  animation: iconAnimation 1s infinite alternate ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+.click-icon svg {
+  width: 96px;
+  height: 96px;
+}
+@media (max-width: 767px) {
+  .click-icon svg {
+    width: 72px;
+    height: 72px;
+  }
+}
+@media (max-width: 479px) {
+  .click-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+}
+.click-icon.is-hidden {
+  opacity: 0;
+}
+
+@-webkit-keyframes iconAnimation {
+  0% {
+    transform: translate(-50%, 0);
+  }
+  100% {
+    transform: translate(-50%, 10px);
+  }
+}
+
+@keyframes iconAnimation {
+  0% {
+    transform: translate(-50%, 0);
+  }
+  100% {
+    transform: translate(-50%, 10px);
+  }
+}
+p {
+  font-family: "Mirza", Verdana, Arial, serif;
+  font-size: 36px;
+  line-height: 1.2em;
+  padding-left: 10px;
+}
+@media (max-width: 767px) {
+  p {
+    font-size: 24px;
+  }
+}
+@media (max-width: 479px) {
+  p {
     font-size: 20px;
-    color: #333;
-    height: 300px;
-    top: 45%;
-    left:25px;
   }
-  
-  .gift {
-    position: absolute;
-    border: 3px solid #333;
-    width:30px;
-    height: 30px;
-    top: 235px;
-    left:83px;
-  }
-  
-  .gift:before, .gift:after {
-    content:"";
-    position: absolute;
-    background-color: #333;
-  }
-  
-  .gift:before {
-    width:30px;
-    height:3px;
-    top:14px;
-  }
-  
-  .gift:after {
-    height:30px;
-    width:3px;
-    left: 14px;
-  }
-  
-  .bow {
-    position: absolute;
-  }
-  
-  .bow:before, .bow:after {
-    content:"";
-    position: absolute;
-    width: 7px;
-    height: 7px;
-    border: 3px solid #333;
-    border-radius:50%;
-    top:-14px;
-  }
-  
-  .bow:before {
-    transform: skew(20deg, 10deg);
-    left:2px;
-  }
-  
-  .bow:after {
-    transform: skew(-20deg,-10deg);
-    left:15px;
-  }
+}
